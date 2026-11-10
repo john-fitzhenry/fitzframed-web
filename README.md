@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# johnfitzhenry.com
 
-## Getting Started
+John Fitzhenry's personal site: photography, video, live and multimedia production, web design and development, and Syracuse University senior portraits.
 
-First, run the development server:
+It is a [Next.js](https://nextjs.org) project that exports to plain static files, so it can be hosted anywhere (Hostinger, Netlify, Vercel).
+
+## Pages
+
+| Path | What it is |
+| --- | --- |
+| `/` | Home: all four disciplines, selected work, about and contact |
+| `/senior-portraits/` | Syracuse University senior portraits: gallery, how it works, FAQ and booking |
+
+## Editing content
+
+Almost all copy, numbers, videos, projects and photo captions live in [`data/site.js`](data/site.js). Change them there and the pages update.
+
+- **Photos** are in `public/photos/` as `name-640.webp`, `name-1200.webp` and `name-1200.jpg`. To add one, export those three files, add an entry to `photos` in `data/site.js`, and add its name to `seniorGallery` or `homeGallery`.
+- **Videos** are click-to-play YouTube embeds. Add an entry to `videos` with the YouTube ID and put `slug-640.webp` and `slug-1280.webp` thumbnails in `public/video/`.
+- **Web projects** use screenshots in `public/work/` (`slug-720.webp`, `slug-1440.webp`).
+- **Contact forms** post to the Formspree form set in `site.formEndpoint`.
+
+## Run it locally
+
+```bash
+npm install
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Build and deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This writes the finished site to `out/`. Upload the contents of `out/` to the web root of the host (on Hostinger, `public_html`). On Vercel or Netlify, connect the repository; the build command is `npm run build` and the output directory is `out`.
