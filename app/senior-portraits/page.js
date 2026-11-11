@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import Photo from "@/components/Photo";
 import Gallery from "@/components/Gallery";
 import ContactForm from "@/components/ContactForm";
-import Testimonials from "@/components/Testimonials";
+import Words from "@/components/Words";
+import Shader from "@/components/Shader";
 import {
   site, seniorGallery, seniorSteps, seniorSpots, seniorFaq, seniorTracks, seniorIncludes,
 } from "@/data/site";
@@ -48,7 +49,8 @@ export default function SeniorPortraits() {
           <div className="hero-copy">
             <p className="label">Class of 2027 · Syracuse, NY · Franklin, MA</p>
             <h1 className="display">
-              Senior portraits <em>you&apos;ll actually want to post.</em>
+              <Words text="Senior portraits" />{" "}
+              <em><Words text="you'll actually want to post." start={2} /></em>
             </h1>
             <p className="lede">
               Cap-and-gown sessions on the Syracuse University campus each spring, and high school
@@ -56,19 +58,19 @@ export default function SeniorPortraits() {
               28 Syracuse seniors in under two weeks.
             </p>
             <p className="actions">
-              <a className="btn" href="#book">Check dates</a>
+              <a className="btn" data-magnetic="" href="#book">Check dates</a>
               <a className="btn btn-ghost" href="#gallery">See the gallery</a>
             </p>
           </div>
           <div className="hero-art">
-            <figure className="frame hero-a">
+            <figure className="frame hero-a" data-reveal="clip" style={{ "--i": 0 }}>
               <Photo name="lizzy_1" sizes="(max-width: 900px) 46vw, 24vw" priority />
             </figure>
-            <figure className="frame hero-b">
+            <figure className="frame hero-b" data-reveal="clip" style={{ "--i": 2 }}>
               <Photo name="dsc03635" sizes="(max-width: 900px) 60vw, 28vw" priority />
               <figcaption className="label">Groups welcome</figcaption>
             </figure>
-            <figure className="frame hero-c">
+            <figure className="frame hero-c" data-reveal="clip" style={{ "--i": 1 }}>
               <Photo name="dsc06907" sizes="(max-width: 900px) 40vw, 18vw" priority />
             </figure>
           </div>
@@ -76,11 +78,11 @@ export default function SeniorPortraits() {
 
         <section className="section tint" aria-labelledby="tracks-h">
           <div className="wrap">
-            <div className="section-head">
+            <div className="section-head" data-stagger="">
               <p className="label">Two kinds of senior</p>
               <h2 id="tracks-h" className="title">Which one are you?</h2>
             </div>
-            <ul className="tracks">
+            <ul className="tracks" data-stagger="">
               {seniorTracks.map((t) => (
                 <li key={t.id} id={t.id}>
                   <p className="label">{t.label}</p>
@@ -94,7 +96,7 @@ export default function SeniorPortraits() {
                     ))}
                   </dl>
                   <p className="track-note">{t.note}</p>
-                  <a className="btn" href="#book">{t.cta}</a>
+                  <a className="btn" data-magnetic="" href="#book">{t.cta}</a>
                 </li>
               ))}
             </ul>
@@ -102,26 +104,24 @@ export default function SeniorPortraits() {
         </section>
 
         <section id="gallery" className="section wrap">
-          <div className="section-head">
+          <div className="section-head" data-stagger="">
             <p className="label">Gallery · Syracuse, spring 2026</p>
             <h2 className="title">Four years, a few good frames.</h2>
             <p className="lede">Select any photo to see it larger.</p>
           </div>
           <Gallery names={seniorGallery} className="gallery-masonry" sizes="(max-width: 700px) 46vw, (max-width: 1100px) 31vw, 280px" />
           <p className="actions gallery-cta">
-            <a className="btn" href="#book">Check dates for your session</a>
+            <a className="btn" data-magnetic="" href="#book">Check dates for your session</a>
           </p>
         </section>
 
-        <Testimonials kind="senior" heading="What seniors and parents say" />
-
         <section className="section tint">
           <div className="wrap">
-            <div className="section-head">
+            <div className="section-head" data-stagger="">
               <p className="label">What you get</p>
               <h2 className="title">Everything from the first email to the final file.</h2>
             </div>
-            <ul className="cards cards-flush">
+            <ul className="cards cards-flush" data-stagger="">
               {seniorIncludes.map((c) => (
                 <li key={c.title}>
                   <h3>{c.title}</h3>
@@ -129,7 +129,7 @@ export default function SeniorPortraits() {
                 </li>
               ))}
             </ul>
-            <ol className="steps steps-after">
+            <ol className="steps steps-after" data-stagger="">
               {seniorSteps.map((s) => (
                 <li key={s.n}>
                   <span className="label">{s.n}</span>
@@ -142,7 +142,7 @@ export default function SeniorPortraits() {
         </section>
 
         <section className="section wrap split">
-          <div className="section-head">
+          <div className="section-head" data-stagger="">
             <p className="label">Syracuse spots</p>
             <h2 className="title">The places you&apos;ll miss.</h2>
             <p className="lede">
@@ -150,7 +150,7 @@ export default function SeniorPortraits() {
               most, and I&apos;m always glad to add yours.
             </p>
           </div>
-          <ul className="spots">
+          <ul className="spots" data-stagger="">
             {seniorSpots.map((s) => (
               <li key={s}>{s}</li>
             ))}
@@ -159,11 +159,11 @@ export default function SeniorPortraits() {
 
         <section className="section tint">
           <div className="wrap split">
-            <div className="section-head">
+            <div className="section-head" data-stagger="">
               <p className="label">Questions</p>
               <h2 className="title">Before you book.</h2>
             </div>
-            <div className="faq">
+            <div className="faq" data-stagger="">
               {seniorFaq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
@@ -174,9 +174,10 @@ export default function SeniorPortraits() {
           </div>
         </section>
 
-        <section id="book" className="section dark">
+        <section id="book" className="section dark has-shader">
+          <Shader />
           <div className="wrap split">
-            <div className="section-head">
+            <div className="section-head" data-stagger="">
               <p className="label">Class of 2027</p>
               <h2 className="title">Check dates and rates.</h2>
               <p className="lede">

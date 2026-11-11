@@ -8,7 +8,7 @@ export default function VideoCard({ video, sizes }) {
   const watchUrl = `https://www.youtube.com/watch?v=${video.id}`;
 
   return (
-    <article className={`video-card${video.feature ? " is-feature" : ""}`}>
+    <article className={`video-card${video.feature ? " is-feature" : ""}`} data-reveal="">
       <div className="video-frame">
         {playing ? (
           <iframe
@@ -20,6 +20,7 @@ export default function VideoCard({ video, sizes }) {
         ) : (
           <a
             className="video-facade"
+            data-cursor="Play"
             href={watchUrl}
             onClick={(e) => {
               if (e.metaKey || e.ctrlKey || e.shiftKey) return;

@@ -30,12 +30,14 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
+  overflow-x: clip;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -1483,5 +1485,387 @@ h3 {
 
   .sticky-cta + .site-footer {
     padding-bottom: 6rem;
+  }
+}
+
+/* ───────────── Motion ───────────── */
+
+@view-transition {
+  navigation: auto;
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+/* Scroll progress */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* Reveal on scroll (only when scripts are running) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i, 0) * 70ms),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i, 0) * 70ms);
+}
+
+.js [data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Photos "develop": wipe up from the bottom edge. The clip sits on the picture, not the
+   observed figure, so the figure still counts as visible to the scroll observer. */
+.js [data-reveal="clip"] {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal="clip"] > picture,
+.js [data-reveal="clip"] > img {
+  display: block;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.1s cubic-bezier(0.7, 0, 0.2, 1) calc(0.15s + var(--i, 0) * 140ms);
+}
+
+.js [data-reveal="clip"].in > picture,
+.js [data-reveal="clip"].in > img {
+  clip-path: inset(0);
+}
+
+.js [data-reveal="clip"] > figcaption,
+.js [data-reveal="clip"] > .rec {
+  opacity: 0;
+  transition: opacity 0.5s calc(1s + var(--i, 0) * 140ms);
+}
+
+.js [data-reveal="clip"].in > figcaption,
+.js [data-reveal="clip"].in > .rec {
+  opacity: 1;
+}
+
+/* Headline words rise in one by one */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.word > span {
+  display: inline-block;
+  animation: word-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 70ms);
+}
+
+@keyframes word-in {
+  from {
+    transform: translateY(105%) rotate(4deg);
+  }
+}
+
+/* Hero photos drift with the pointer */
+.hero-art {
+  --px: 0;
+  --py: 0;
+}
+
+.hero-a picture,
+.hero-b > img,
+.hero-b picture,
+.hero-c picture {
+  display: block;
+  transition: translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hero-a picture {
+  translate: calc(var(--px) * -10px) calc(var(--py) * -10px);
+}
+
+.hero-c picture {
+  translate: calc(var(--px) * 16px) calc(var(--py) * 16px);
+}
+
+.hero-b {
+  translate: calc(var(--px) * -26px) calc(var(--py) * -20px);
+  transition: translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hero-a,
+.hero-c {
+  overflow: visible;
+}
+
+/* REC badge */
+.rec {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(20, 17, 14, 0.78);
+  color: var(--night-text);
+  font: 500 0.68rem/1 var(--mono);
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rec i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #ff3b30;
+  animation: blink 1.2s steps(2, jump-none) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* Marquee */
+.marquee {
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-block: clamp(1rem, 2.4vw, 1.75rem);
+  border-block: 1px solid var(--line);
+  rotate: -1.2deg;
+  scale: 1.02;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee ul {
+  display: flex;
+  flex: none;
+}
+
+.marquee li {
+  display: flex;
+  align-items: center;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.5vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.marquee li:nth-child(even) {
+  font-style: italic;
+  color: var(--accent-ink);
+}
+
+.marquee li::after {
+  content: "";
+  width: 0.32em;
+  height: 0.32em;
+  margin-inline: 0.55em;
+  border: 2px solid var(--accent);
+  border-right: 0;
+  border-bottom: 0;
+  rotate: 45deg;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Horizontal photo strip */
+.strip {
+  padding-block: var(--section) 0;
+}
+
+.strip .section-head {
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.gallery-strip {
+  display: flex;
+  gap: 1rem;
+  padding-inline: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-strip li {
+  flex: none;
+  scroll-snap-align: center;
+}
+
+.gallery-strip .shot img {
+  width: auto;
+  height: min(58vh, 30rem);
+}
+
+.strip-on .strip-sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 4rem;
+  overflow: hidden;
+}
+
+.strip-on .gallery-strip {
+  width: max-content;
+  padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  overflow: visible;
+  will-change: transform;
+}
+
+.strip-on .gallery-strip .shot img {
+  height: min(52vh, 34rem);
+}
+
+.strip-on .gallery-strip li:nth-child(even) {
+  margin-top: 2.5rem;
+}
+
+.after-strip {
+  padding-block: clamp(2.5rem, 5vw, 4rem) var(--section);
+}
+
+/* Shader behind dark sections */
+.has-shader {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.shader {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cursor badge */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 5.25rem;
+  height: 5.25rem;
+  margin: -2.625rem 0 0 -2.625rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font: 600 0.72rem/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  scale: 0;
+  transition: scale 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.cursor.on {
+  scale: 1;
+}
+
+dialog[open] ~ .cursor {
+  display: none;
+}
+
+/* Small flourishes */
+.btn {
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.frame::before,
+.frame::after {
+  transition: translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.frame:hover::before {
+  translate: -4px -4px;
+}
+
+.frame:hover::after {
+  translate: 4px 4px;
+}
+
+.video-card:hover .play {
+  animation: pulse 1.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 0 rgba(232, 89, 12, 0.55);
+  }
+  to {
+    box-shadow: 0 0 0 18px rgba(232, 89, 12, 0);
+  }
+}
+
+.disciplines a .more,
+.intents a .more {
+  transition: translate 0.25s;
+}
+
+.disciplines a:hover .more,
+.intents a:hover .more {
+  translate: 6px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal="clip"] > picture,
+  .js [data-reveal="clip"] > img,
+  .js [data-reveal="clip"] > figcaption,
+  .js [data-reveal="clip"] > .rec {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+
+  .word > span,
+  .marquee-track,
+  .rec i {
+    animation: none;
+  }
+
+  .marquee {
+    rotate: none;
+    scale: none;
+  }
+
+  @view-transition {
+    navigation: none;
   }
 }

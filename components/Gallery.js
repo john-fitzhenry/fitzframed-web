@@ -35,11 +35,12 @@ export default function Gallery({ names, sizes, className = "" }) {
 
   return (
     <>
-      <ul className={`gallery ${className}`}>
+      <ul className={`gallery ${className}`} data-stagger="">
         {names.map((name, i) => (
           <li key={name}>
             <button
               className="shot"
+              data-cursor="View"
               onClick={(e) => {
                 opener.current = e.currentTarget;
                 setIndex(i);

@@ -18,12 +18,6 @@ export const site = {
   },
 };
 
-// Client quotes. Leave empty until each person has agreed to be quoted;
-// the testimonial sections only appear when there is at least one entry.
-// Example: { quote: "…", name: "First Last", role: "Parent of a 2027 senior", for: "senior" }
-// `for` is "senior" (senior portraits page) or "work" (home page).
-export const testimonials = [];
-
 // The three kinds of visitor, routed from the top of the home page.
 export const intents = [
   {
@@ -414,4 +408,16 @@ export const seniorFaq = [
     q: "How do I get my photos?",
     a: "Through a private online gallery you can download from and share with family.",
   },
+];
+
+// Words that scroll past in the band under the hero.
+export const marquee = [
+  "Senior portraits", "Music videos", "Live show capture", "Headshots",
+  "Podcasts", "Short-form social", "Documentary", "Websites",
+];
+
+// Photos in the horizontal strip on the home page.
+export const stripGallery = [
+  "dsc02228", "dsc06907", "dsc05655", "lizzy_2", "dsc03635", "dsc06605",
+  "dsc03997", "maggie_1", "dsc03843", "charlotte_1", "dsc07155", "dsc04885",
 ];

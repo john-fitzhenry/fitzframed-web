@@ -13,8 +13,6 @@ It is a [Next.js](https://nextjs.org) project that exports to plain static files
 
 ## Editing content
 
-Client quotes go in `testimonials` in `data/site.js`; the testimonial sections stay hidden until that list has entries. Only add a quote once the person has agreed to it.
-
 Almost all copy, numbers, videos, projects and photo captions live in [`data/site.js`](data/site.js). Change them there and the pages update.
 
 - **Photos** are in `public/photos/` as `name-640.webp`, `name-1200.webp` and `name-1200.jpg`. To add one, export those three files, add an entry to `photos` in `data/site.js`, and add its name to `seniorGallery` or `homeGallery`.

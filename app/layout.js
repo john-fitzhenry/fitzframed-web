@@ -4,6 +4,7 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import { site } from "@/data/site";
+import Motion from "@/components/Motion";
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -42,8 +43,20 @@ const personLd = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Marks the page as script-enabled before first paint so reveal animations don't flash.
+            If the motion script never starts, everything is shown after a moment. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js');setTimeout(function(){if(!document.documentElement.dataset.motion)document.documentElement.classList.remove('js')},3000)",
+          }}
+        />
+      </head>
       <body>
+        <div className="progress" aria-hidden="true" />
         {children}
+        <Motion />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       </body>
     </html>
