@@ -13,6 +13,8 @@ It is a [Next.js](https://nextjs.org) project that exports to plain static files
 
 ## Editing content
 
+Client quotes go in `testimonials` in `data/site.js`; the testimonial sections stay hidden until that list has entries. Only add a quote once the person has agreed to it.
+
 Almost all copy, numbers, videos, projects and photo captions live in [`data/site.js`](data/site.js). Change them there and the pages update.
 
 - **Photos** are in `public/photos/` as `name-640.webp`, `name-1200.webp` and `name-1200.jpg`. To add one, export those three files, add an entry to `photos` in `data/site.js`, and add its name to `seniorGallery` or `homeGallery`.
@@ -31,6 +33,10 @@ npm run dev
 ```
 
 Open http://localhost:3000.
+
+## fitzframed.com
+
+`fitzframed.com/` holds a copy of the live FitzFramed site (plain HTML, CSS and JS, no build step). Edit the files there and upload the changed ones to that domain's `public_html` on Hostinger. When you change `style.css` or replace an image, bump the `?v=` on the stylesheet link or give the image a new filename, because the host caches both for a long time.
 
 ## Build and deploy
 

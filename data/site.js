@@ -8,7 +8,7 @@ export const site = {
   // Same Formspree form the previous johnfitzhenry.com and fitzframed.com use.
   formEndpoint: "https://formspree.io/f/xqegvprp",
   description:
-    "John Fitzhenry is a photographer, filmmaker and web builder based in Syracuse, NY and Franklin, MA: Syracuse University senior portraits, video and live production, and websites.",
+    "John Fitzhenry is a photographer, filmmaker and web builder in Syracuse, NY and Franklin, MA: senior portraits, video and live production, and websites.",
   links: {
     instagram: "https://www.instagram.com/fitzframed/",
     youtube: "https://www.youtube.com/@FitzFramed",
@@ -17,6 +17,40 @@ export const site = {
     fitzframed: "https://fitzframed.com",
   },
 };
+
+// Client quotes. Leave empty until each person has agreed to be quoted;
+// the testimonial sections only appear when there is at least one entry.
+// Example: { quote: "…", name: "First Last", role: "Parent of a 2027 senior", for: "senior" }
+// `for` is "senior" (senior portraits page) or "work" (home page).
+export const testimonials = [];
+
+// The three kinds of visitor, routed from the top of the home page.
+export const intents = [
+  {
+    who: "I'm a graduating senior",
+    body: "Cap-and-gown portraits at Syracuse, or high school senior portraits in Massachusetts.",
+    href: "/senior-portraits/",
+    cta: "See senior portraits",
+  },
+  {
+    who: "I run a company, school or show",
+    body: "Promos, show capture, headshots, podcasts and social content for your organization.",
+    href: "/#video",
+    cta: "See video and photo work",
+  },
+  {
+    who: "I need a website",
+    body: "A fast site that explains what you do and gets people to contact you.",
+    href: "/#web",
+    cta: "See web work",
+  },
+];
+
+export const nextSteps = [
+  "I reply with availability and a few questions.",
+  "You get a plan and a quote before anything is booked.",
+  "We make it, and you see the work before it's final.",
+];
 
 export const stats = [
   { value: "1.8M+", label: "views on my YouTube channel" },
@@ -186,7 +220,7 @@ export const webProjects = [
     role: "Design & build",
     body: "My production company's site, rebuilt as static pages with click-to-play video. The rebuild cut its JavaScript from 447 KB to 4 KB.",
     stack: ["HTML & CSS", "Python build", "Technical SEO"],
-    alt: "FitzFramed homepage: a performer flying above a dark stage behind the words Fitz Framed Media Production",
+    alt: "FitzFramed homepage: a performer on stage in front of an audience behind the words Fitz Framed Media Production",
   },
 ];
 
@@ -277,20 +311,66 @@ export const seniorGallery = [
 // The smaller selection shown on the home page.
 export const homeGallery = ["dsc02228", "dsc06907", "dsc05655", "lizzy_2", "dsc06605", "dsc03997"];
 
+export const seniorTracks = [
+  {
+    id: "syracuse",
+    label: "College",
+    title: "Syracuse University graduates",
+    points: [
+      ["When", "Spring, in the weeks before Commencement"],
+      ["Where", "On campus, at two or three spots you choose"],
+      ["Who", "Just you, a couple, your roommates, or your whole team or group"],
+    ],
+    note: "Last spring I photographed 28 Syracuse seniors in under two weeks, so the calendar fills quickly.",
+    cta: "Ask about spring dates",
+  },
+  {
+    id: "high-school",
+    label: "High school",
+    title: "High school seniors around Franklin, MA",
+    points: [
+      ["When", "Summer, in the evening so we finish at sunset"],
+      ["Where", "Your school, the town common, or a place that means something to you"],
+      ["Yearbook", "I retouch the photo you pick and size it for your school's yearbook, ahead of the deadline"],
+    ],
+    note: "Parents are welcome to come along, and to do the booking.",
+    cta: "Ask about summer dates",
+  },
+];
+
+export const seniorIncludes = [
+  {
+    title: "A plan before the day",
+    body: "We settle the time, the spots and what to bring by email, so nobody is guessing when we meet.",
+  },
+  {
+    title: "Direction, not posing",
+    body: "I come from the stage and from film sets. I'll tell you where to stand and what to do with your hands.",
+  },
+  {
+    title: "An edited gallery",
+    body: "Your photos arrive color-graded in a private online gallery you can download from and share with family.",
+  },
+  {
+    title: "Retouching on your favorites",
+    body: "The ones headed for a frame, a yearbook or an announcement get a closer pass.",
+  },
+];
+
 export const seniorSteps = [
   {
     n: "01",
-    title: "Plan",
-    body: "Tell me who's coming and which corners of campus matter to you. We pick a time when the light is good.",
+    title: "Send a note",
+    body: "Tell me your school, roughly when you'd like to shoot and who's coming. I reply with dates and rates.",
   },
   {
     n: "02",
     title: "Shoot",
-    body: "We walk the campus together. I direct as much or as little as you like, so nobody has to know how to pose.",
+    body: "We meet when the light is good, walk between spots, and I direct as much or as little as you like.",
   },
   {
     n: "03",
-    title: "Gallery",
+    title: "Get your gallery",
     body: "Your edited photos arrive in a private online gallery, ready to download, post and print.",
   },
 ];
@@ -308,23 +388,27 @@ export const seniorSpots = [
 export const seniorFaq = [
   {
     q: "Who are these sessions for?",
-    a: "Graduating Syracuse University seniors and grad students. Come solo, as a couple, with your roommates, or with your whole team or a cappella group.",
+    a: "Graduating Syracuse University seniors and grad students, and high school seniors in and around Franklin, Massachusetts. Come solo, as a couple, with your roommates, or with your whole team or a cappella group.",
   },
   {
     q: "When do sessions happen?",
-    a: "In the spring, in the weeks before Commencement. Last year's sessions ran from late April into May. I'm studying in London this fall and back on campus for spring 2027, so get in touch now and I'll hold a spot for you.",
-  },
-  {
-    q: "What should I bring?",
-    a: "Your cap, gown and stole, plus one outfit that feels like you. Anything that tells your Syracuse story is welcome: a jersey, an instrument, your org's stole, a bottle of champagne.",
-  },
-  {
-    q: "Can my friends be in the photos?",
-    a: "Yes. A lot of last year's sessions were groups, and group shots end up being the ones people keep. Tell me how many of you there are when you book.",
+    a: "Syracuse sessions run in the spring, in the weeks before Commencement; last year's ran from late April into May. High school sessions run in the summer in Massachusetts. I'm studying in London this fall and back for spring 2027, so get in touch now and I'll hold a spot for you.",
   },
   {
     q: "How much does it cost?",
-    a: "It depends on the length of the session and the size of your group. Send me a note and I'll reply with this year's rates.",
+    a: "It depends on the length of the session and how many people are in it. Send a note with those two things and I'll reply with this year's rates.",
+  },
+  {
+    q: "Do you handle the yearbook photo?",
+    a: "Yes. For high school seniors, you pick your favorite, I retouch it and size it to your school's yearbook requirements, and you have it well before the deadline.",
+  },
+  {
+    q: "What should I bring?",
+    a: "For graduation portraits, your cap, gown and stole plus one outfit that feels like you. Anything that tells your story is welcome: a jersey, an instrument, your org's stole, a bottle of champagne.",
+  },
+  {
+    q: "Can friends or family be in the photos?",
+    a: "Yes. A lot of last year's Syracuse sessions were groups, and group shots end up being the ones people keep. Parents are welcome at high school sessions. Tell me how many of you there are when you book.",
   },
   {
     q: "How do I get my photos?",

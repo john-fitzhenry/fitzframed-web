@@ -4,9 +4,10 @@ import Photo from "@/components/Photo";
 import VideoCard from "@/components/VideoCard";
 import Gallery from "@/components/Gallery";
 import ContactForm from "@/components/ContactForm";
+import Testimonials from "@/components/Testimonials";
 import {
   site, stats, disciplines, videos, videoAlso, liveWork, photoWork,
-  webProjects, webAlso, clients, toolkit, homeGallery,
+  webProjects, webAlso, clients, toolkit, homeGallery, intents, nextSteps,
 } from "@/data/site";
 
 export default function Home() {
@@ -24,12 +25,12 @@ export default function Home() {
               Photographer, filmmaker <em>and the person who builds the website too.</em>
             </h1>
             <p className="lede">
-              I&apos;m John Fitzhenry. I shoot senior portraits at Syracuse University, make video for
-              the university and for performing arts companies across New England, and design and
-              build websites.
+              I&apos;m John Fitzhenry. I shoot senior portraits in Syracuse and Massachusetts, make
+              video for Syracuse University and performing arts companies across New England, and
+              design and build websites.
             </p>
             <p className="actions">
-              <a className="btn" href="#video">See the work</a>
+              <a className="btn" href="#contact">Start a project</a>
               <a className="btn btn-ghost" href="/senior-portraits/">Book senior portraits</a>
             </p>
           </div>
@@ -50,6 +51,21 @@ export default function Home() {
               <Photo name="dsc02594" sizes="(max-width: 900px) 40vw, 18vw" priority />
             </figure>
           </div>
+        </section>
+
+        {/* Route each kind of visitor */}
+        <section className="wrap" aria-label="Where to start">
+          <ul className="intents">
+            {intents.map((i) => (
+              <li key={i.who}>
+                <a href={i.href}>
+                  <h2>{i.who}</h2>
+                  <p>{i.body}</p>
+                  <span className="more">{i.cta} →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* Proof */}
@@ -220,6 +236,8 @@ export default function Home() {
           </ul>
         </section>
 
+        <Testimonials kind="work" heading="What clients say" />
+
         {/* About */}
         <section id="about" className="section wrap about">
           <figure className="frame about-photo">
@@ -265,6 +283,11 @@ export default function Home() {
                 A shoot, a show, a site, or senior portraits. Send a few details and I&apos;ll reply
                 with next steps.
               </p>
+              <ol className="next">
+                {nextSteps.map((t, i) => (
+                  <li key={t}><span className="label">0{i + 1}</span>{t}</li>
+                ))}
+              </ol>
               <p>
                 Or email <a href={`mailto:${site.email}`}>{site.email}</a>.
               </p>

@@ -199,7 +199,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  background: var(--paper);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
@@ -1302,5 +1302,186 @@ h3 {
   *::before,
   *::after {
     transition: none !important;
+  }
+}
+
+/* Intent router (home) */
+.intents {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.intents a {
+  display: grid;
+  gap: 0.5rem;
+  height: 100%;
+  align-content: start;
+  padding: 1.25rem 1.35rem 1.4rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.intents h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.intents p {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+.intents a:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.intents a:hover p {
+  color: #d8cfc0;
+}
+
+.intents a:hover .more {
+  color: #ff9a5c;
+}
+
+@media (max-width: 800px) {
+  .intents {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* What happens next (contact) */
+.next {
+  display: grid;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+}
+
+.next li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  color: #d8cfc0;
+}
+
+/* Senior tracks */
+.tracks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.tracks > li {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  justify-items: start;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius);
+  scroll-margin-top: 6rem;
+}
+
+.tracks h3 {
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  font-weight: 400;
+}
+
+.tracks dl {
+  display: grid;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.tracks dl > div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.track-note {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+@media (max-width: 800px) {
+  .tracks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards-flush {
+  margin-top: 0;
+}
+
+.steps-after {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.gallery-cta {
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Testimonials */
+.quotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.quotes blockquote {
+  margin: 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ink);
+}
+
+.quotes p {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.quotes footer {
+  display: grid;
+  margin-top: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+/* Sticky booking bar on phones (senior page) */
+.sticky-cta {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .sticky-cta {
+    position: fixed;
+    inset: auto 0.75rem 0.75rem 0.75rem;
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    padding: 0.95rem 1rem;
+    border-radius: 999px;
+    background: var(--accent-ink);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -8px rgba(20, 17, 14, 0.6);
+  }
+
+  .sticky-cta + .site-footer {
+    padding-bottom: 6rem;
   }
 }

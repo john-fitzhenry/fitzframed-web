@@ -3,7 +3,7 @@ import { useState } from "react";
 import { site } from "@/data/site";
 
 // Posts to Formspree. Without JavaScript it still works as a normal form post.
-export default function ContactForm({ topics, defaultTopic, subject }) {
+export default function ContactForm({ topics, defaultTopic, subject, topicLabel = "What do you need?", extra, messagePlaceholder = "Dates, location, and anything else that helps." }) {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   async function onSubmit(e) {
@@ -46,16 +46,22 @@ export default function ContactForm({ topics, defaultTopic, subject }) {
         <input id="cf-email" name="email" type="email" autoComplete="email" required />
       </div>
       <div className="field field-wide">
-        <label htmlFor="cf-topic">What do you need?</label>
+        <label htmlFor="cf-topic">{topicLabel}</label>
         <select id="cf-topic" name="topic" defaultValue={defaultTopic}>
           {topics.map((t) => (
             <option key={t}>{t}</option>
           ))}
         </select>
       </div>
+      {extra && (
+        <div className="field field-wide">
+          <label htmlFor="cf-extra">{extra.label}</label>
+          <input id="cf-extra" name={extra.name} type="text" placeholder={extra.placeholder} />
+        </div>
+      )}
       <div className="field field-wide">
         <label htmlFor="cf-message">Details</label>
-        <textarea id="cf-message" name="message" rows={5} required placeholder="Dates, location, and anything else that helps." />
+        <textarea id="cf-message" name="message" rows={5} required placeholder={messagePlaceholder} />
       </div>
       <div className="field-wide form-actions">
         <button className="btn" type="submit" disabled={status === "sending"}>

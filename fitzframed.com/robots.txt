@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /client-handoff
+Sitemap: https://fitzframed.com/sitemap.xml

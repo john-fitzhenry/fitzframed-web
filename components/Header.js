@@ -47,7 +47,7 @@ export default function Header({ current }) {
             </a>
           ))}
           <a className="btn btn-small" href={current === "/senior-portraits/" ? "#book" : "/#contact"} onClick={() => setOpen(false)}>
-            Get in touch
+            {current === "/senior-portraits/" ? "Check dates" : "Start a project"}
           </a>
         </nav>
       </div>
