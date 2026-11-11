@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css?v=2">
+    <link rel="stylesheet" href="/style.css?v=3">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"John Fitzhenry","url":"https://fitzframed.com","jobTitle":"Media Producer","description":"High-end photo and video production for local brands in Massachusetts.","sameAs":["https://www.instagram.com/fitzframed/","https://www.youtube.com/@FitzFramed","https://www.linkedin.com/in/john-fitzhenry/"]}
     </script>
@@ -50,7 +50,10 @@
         <section id="hero">
             <span class="letterbox" aria-hidden="true"></span>
             <div class="hero-media">
-                <img src="/media-assets/tarzan-stage-1200w.webp" alt="Performer on stage in front of the audience during FPAC's Tarzan, a frame from Fitz Framed's video capture" width="1200" height="618" fetchpriority="high" decoding="async">
+                <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/media-assets/hero-once-poster.webp" width="1280" height="720" aria-label="Behind the scenes: a cinema camera on a gimbal filming FPAC's production of Once">
+                    <source src="/media-assets/hero-once.webm" type="video/webm">
+                    <source src="/media-assets/hero-once.mp4" type="video/mp4">
+                </video>
             </div>
             <div class="frame-corners" aria-hidden="true"></div>
             <div class="hero-content">
@@ -240,5 +243,9 @@
         <p>&copy; 2026 Fitz Framed // All rights reserved.</p>
     </footer>
     <script src="/script.js" defer></script>
+<script>
+    // Respect reduced-motion: show the poster frame instead of playing the loop.
+    (function(){var v=document.querySelector('.hero-video');if(v&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}})();
+    </script>
 </body>
 </html>
